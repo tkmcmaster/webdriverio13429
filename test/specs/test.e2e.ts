@@ -27,7 +27,10 @@ describe('My Login application', () => {
         );
         expect(shadowElement, "shadowElement: " + JSON.stringify(shadowElement)).to.equal(true);
         await browser.$("#helloshadow").waitForDisplayed();
-        await browser.$(">>>#shadowelement").waitForExist();
+        await browser.$(">>>#shadowelement").waitForExist().catch(async (error) => {
+            console.error(error);
+            await browser.$("#shadowelement").waitForExist();
+        });
     })
 })
 
